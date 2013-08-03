@@ -47,6 +47,7 @@ reloadPage = () ->
 
 	resizeTheImage()
 	loadBottomBarImages()
+	buildNavFunctions()
 
 
 loadPage = () -> 
@@ -62,7 +63,6 @@ $(document).ready ->
 	loadPage()	
 
 	$(window).bind 'resize', () -> reloadPage()
-
 
 
 
@@ -154,7 +154,7 @@ window.theImageAfter = (id) ->
 	else return id + 1
 
 
-## Arrow Key Functionality ##
+## Arrow Key & Spacebar Functionality ##
 
 $(document).keydown( (e) -> 
 
@@ -166,6 +166,23 @@ $(document).keydown( (e) ->
 
 
 
+## Exiting page functions ## 
+
+exitPage = (destination) ->
+
+	go = () -> window.location.href = destination
+
+	$("#headerBar").fadeOut(800)
+	$("#theImage").fadeOut(800)
+	$("#bottomBar").fadeOut(800)
+
+	window.setTimeout(go, 800)	
+
+
+buildNavFunctions = () ->
+
+	$("#About").click -> exitPage("404.html")
+	$("#Contact").click -> exitPage("404.html")
 
 
 
