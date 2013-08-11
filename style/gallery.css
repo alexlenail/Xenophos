@@ -3,32 +3,12 @@
 body {
 
 	background-color: #171515;
-	font-family: 'Lato', sans-serif;
-	font-weight: 100;
-	color: white;
+
 }
 
-#headerBar {
+/*	#HeaderBar and #HeaderBarLogo styles can be found in style.css 	*/
 
-	background-color: #2b2727;
-	width: auto;
-	height: 90px;
-	margin-top: 30px;
-	margin-bottom: 30px;
-}
-
-#headerBarLogo {
-
-	background-image: url("../images/graphics/logo.png"); /*Version 9*/
-	background-repeat: no-repeat;
-	position: absolute;
-	left: 13%;
-	height: 81px;
-	width: 512px;
-	margin-top: 8px;
-}
-
- #Gallery {opacity:1.0;}
+#Gallery {opacity:1.0;}
 
 
 

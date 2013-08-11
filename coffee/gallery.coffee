@@ -1,7 +1,7 @@
 ## The data model is stored locally ##
 
 images = []
-selected = 4
+selected = 4  # Initial value
 numberOfGalleryImages = 30
 
 
@@ -181,8 +181,9 @@ exitPage = (destination) ->
 
 buildNavFunctions = () ->
 
-	$("#About").click -> exitPage("404.html")
+	$("#About").click -> exitPage("About.html")
 	$("#Contact").click -> exitPage("404.html")
+	$("#headerBarLogo").click -> exitPage("index.html")
 
 
 

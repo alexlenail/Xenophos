@@ -3,30 +3,44 @@
   var goToGallery, operatingSystem, preload, preloadGalleryImages, prepareEnterSite, resizeIndexImage;
 
   resizeIndexImage = function() {
-    var image_height, image_width, topOffset, window_height, window_width;
+    var $indexImage, image_height, image_width, leftOffset, topOffset, window_height, window_width;
     window_height = $(window).height();
     window_width = $(window).width();
-    image_height = $(".indexImage").height();
-    image_width = $(".indexImage").width();
+    $indexImage = $(".indexImage");
+    image_height = $indexImage.height();
+    image_width = $indexImage.width();
     if ((window_height / window_width) > (image_height / image_width)) {
-      $(".indexImage").height(window_height);
-      $(".indexImage").width(window_height * image_width / image_height);
-      return $(".indexImage").offset({
+      $indexImage.height(window_height);
+      $indexImage.width(window_height * image_width / image_height);
+      leftOffset = ($indexImage.width() - $(window).width()) / 2;
+      if (leftOffset > 0) {
+        $indexImage.offset({
+          left: -leftOffset
+        });
+      } else {
+        $indexImage.offset({
+          left: 0
+        });
+      }
+      return $indexImage.offset({
         top: 0
       });
     } else {
-      $(".indexImage").width(window_width);
-      $(".indexImage").height(window_width * image_height / image_width);
-      topOffset = ($(".indexImage").height() - $(window).height()) / 2;
+      $indexImage.width(window_width);
+      $indexImage.height(window_width * image_height / image_width);
+      topOffset = ($indexImage.height() - $(window).height()) / 2;
       if (topOffset > 0) {
-        return $(".indexImage").offset({
+        $indexImage.offset({
           top: -topOffset
         });
       } else {
-        return $(".indexImage").offset({
+        $indexImage.offset({
           top: 0
         });
       }
+      return $indexImage.offset({
+        left: 0
+      });
     }
   };
 
@@ -51,6 +65,7 @@
     gallery = [];
     for (i = _i = 1; _i <= 30; i = ++_i) {
       gallery.push("../images/portfolio/lightpainting/" + i + ".jpg");
+      gallery.push("../images/portfolio/lightpainting/icons/" + i + ".jpg");
     }
     return preload(gallery);
   };
@@ -65,9 +80,9 @@
     var $enterSite;
     $enterSite = $("#enterSite");
     return $enterSite.delay(10).fadeIn(3000, function() {
-      return $enterSite.addClass("fade");
+      return $enterSite.addClass("fade2");
     }).click(function() {
-      $enterSite.removeClass("fade").fadeOut(800);
+      $enterSite.removeClass("fade2").fadeOut(800);
       $(".indexImage").fadeOut(2000);
       return window.setTimeout(goToGallery, 2000);
     });

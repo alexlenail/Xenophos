@@ -4,24 +4,33 @@ resizeIndexImage = () ->
 
 	window_height = $(window).height()
 	window_width = $(window).width()
-	image_height = $(".indexImage").height()
-	image_width = $(".indexImage").width()
+	$indexImage = $(".indexImage")
+	image_height = $indexImage.height()
+	image_width = $indexImage.width()
 
 	if (window_height / window_width) > (image_height / image_width) # => skinny window
 
-		$(".indexImage").height(window_height)
-		$(".indexImage").width(window_height * image_width / image_height)
-		$(".indexImage").offset({top: 0})
+		$indexImage.height(window_height)
+		$indexImage.width(window_height * image_width / image_height)
+		leftOffset = ($indexImage.width() - $(window).width()) / 2
+		if leftOffset > 0
+			$indexImage.offset({left: -leftOffset})
+		else
+			$indexImage.offset({left: 0})			
+
+		$indexImage.offset({top: 0})
 
 	else # (window_height / window_width) < (image_height / image_width) # => fat window
 
-		$(".indexImage").width(window_width)
-		$(".indexImage").height(window_width * image_height / image_width)
-		topOffset = ($(".indexImage").height() - $(window).height()) / 2
+		$indexImage.width(window_width)
+		$indexImage.height(window_width * image_height / image_width)
+		topOffset = ($indexImage.height() - $(window).height()) / 2
 		if topOffset > 0
-			$(".indexImage").offset({top: -topOffset})
+			$indexImage.offset({top: -topOffset})
 		else
-			$(".indexImage").offset({top: 0})
+			$indexImage.offset({top: 0})
+
+		$indexImage.offset({left: 0})
 
 
 $(document).ready () -> 
@@ -47,7 +56,8 @@ preloadGalleryImages = () ->
 
 	gallery = []
 	for i in [1..30]
-		gallery.push("../images/portfolio/lightpainting/#{i}.jpg") 
+		gallery.push("../images/portfolio/lightpainting/#{i}.jpg")
+		gallery.push("../images/portfolio/lightpainting/icons/#{i}.jpg")
 	preload(gallery)
 
 
@@ -64,8 +74,8 @@ prepareEnterSite = () ->
 
 	$enterSite = $("#enterSite")
 
-	$enterSite.delay(10).fadeIn(3000, -> $enterSite.addClass("fade")).click ->
-		$enterSite.removeClass("fade").fadeOut(800)
+	$enterSite.delay(10).fadeIn(3000, -> $enterSite.addClass("fade2")).click ->
+		$enterSite.removeClass("fade2").fadeOut(800)
 		$(".indexImage").fadeOut(2000)
 		window.setTimeout(goToGallery, 2000)
 

@@ -192,10 +192,13 @@
 
   buildNavFunctions = function() {
     $("#About").click(function() {
+      return exitPage("About.html");
+    });
+    $("#Contact").click(function() {
       return exitPage("404.html");
     });
-    return $("#Contact").click(function() {
-      return exitPage("404.html");
+    return $("#headerBarLogo").click(function() {
+      return exitPage("index.html");
     });
   };
 
