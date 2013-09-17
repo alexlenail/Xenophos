@@ -10,7 +10,9 @@ body { background-color: black; }
 	left: 50%;
 	font-size: 24px;
 	margin-left: -70px;
-} 
+	opacity: 0.5;
+
+} #enterSite:hover {opacity: 1;}
 
 
 

@@ -126,9 +126,7 @@
     addFront();
     return $("#bottomBar").animate({
       "padding-left": "193px"
-    }, 400, 'linear', function() {
-      return removeBack();
-    });
+    }, 400, 'linear', removeBack());
   };
 
   removeFront = function() {
@@ -184,10 +182,10 @@
     go = function() {
       return window.location.href = destination;
     };
-    $("#headerBar").fadeOut(800);
-    $("#theImage").fadeOut(800);
-    $("#bottomBar").fadeOut(800);
-    return window.setTimeout(go, 800);
+    $("#headerBar").fadeOut(400);
+    $("#theImage").fadeOut(400);
+    $("#bottomBar").fadeOut(400);
+    return window.setTimeout(go, 400);
   };
 
   buildNavFunctions = function() {

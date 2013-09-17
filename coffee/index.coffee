@@ -41,7 +41,7 @@ $(document).ready () ->
 	$indexImage.hide()
 	$enterSite.hide()
 	
-	$(window).bind 'resize', () -> resizeIndexImage()
+	$(window).bind 'resize', -> resizeIndexImage()
 
 	$indexImage.load -> 
 		resizeIndexImage()
@@ -74,10 +74,10 @@ prepareEnterSite = () ->
 
 	$enterSite = $("#enterSite")
 
-	$enterSite.delay(10).fadeIn(3000, -> $enterSite.addClass("fade2")).click ->
+	$enterSite.delay(10).fadeIn(3000, -> $enterSite.addClass("fade2").click ->
 		$enterSite.removeClass("fade2").fadeOut(800)
 		$(".indexImage").fadeOut(2000)
-		window.setTimeout(goToGallery, 2000)
+		window.setTimeout(goToGallery, 2000) )
 
 
 

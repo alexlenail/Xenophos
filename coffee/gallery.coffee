@@ -122,7 +122,7 @@ slideRight = () ->
 	
 	addFront()
 
-	$("#bottomBar").animate("padding-left": "193px", 400, 'linear', -> removeBack())
+	$("#bottomBar").animate("padding-left": "193px", 400, 'linear', removeBack())
 
 	
 removeFront = () -> deleteListItem( images.shift() )
@@ -172,11 +172,11 @@ exitPage = (destination) ->
 
 	go = () -> window.location.href = destination
 
-	$("#headerBar").fadeOut(800)
-	$("#theImage").fadeOut(800)
-	$("#bottomBar").fadeOut(800)
+	$("#headerBar").fadeOut(400)
+	$("#theImage").fadeOut(400)
+	$("#bottomBar").fadeOut(400)
 
-	window.setTimeout(go, 800)	
+	window.setTimeout(go, 400)	
 
 
 buildNavFunctions = () ->

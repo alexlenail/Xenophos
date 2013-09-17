@@ -80,11 +80,11 @@
     var $enterSite;
     $enterSite = $("#enterSite");
     return $enterSite.delay(10).fadeIn(3000, function() {
-      return $enterSite.addClass("fade2");
-    }).click(function() {
-      $enterSite.removeClass("fade2").fadeOut(800);
-      $(".indexImage").fadeOut(2000);
-      return window.setTimeout(goToGallery, 2000);
+      return $enterSite.addClass("fade2").click(function() {
+        $enterSite.removeClass("fade2").fadeOut(800);
+        $(".indexImage").fadeOut(2000);
+        return window.setTimeout(goToGallery, 2000);
+      });
     });
   };
 
