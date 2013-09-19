@@ -28,11 +28,15 @@ getCurrentPanes = () -> return currentPanes
 
 ## Loading Page Functions ##
 
+$(document).ready -> loadpage()
+
 loadpage = () -> 
 
 	buildNavFunctions()
 	bindClickEvents()
-	setAndBindTextWidthSize()
+	
+	setAndBindHowPageSizes()
+	setAndBindWhoPageSizes()
 
 	$("#headerBar").hide().fadeIn(1000)
 	who = $("#who").hide().fadeIn(1000)
@@ -41,15 +45,11 @@ loadpage = () ->
 	addToCurrentPanes(who, what)
 
 
-$(document).ready -> loadpage()
-
-
 buildNavFunctions = () ->
 
 	$("#Gallery").click -> exitPage("gallery.html")
 	$("#Contact").click -> exitPage("404.html")
 	$("#headerBarLogo").click -> exitPage("index.html")
-
 
 
 bindClickEvents = () -> 
@@ -64,47 +64,27 @@ bindClickEvents = () ->
 		clearAllCurrentPanes(); 
 		howWeDidIt();
 
-
-setAndBindTextWidthSize = () -> 
-
-	setTextWidthSize = () -> 
-
-		w = $(window).width()
-		if w > 1400 then $(".text").css(width:"20%")
-		else if w > 1200 then $(".text").css(width:"30%")
-		else if w > 900 then $(".text").css(width:"40%")
-		else $(".text").css(width:"60%")
-
-	
-	$(window).bind 'resize', -> setTextWidthSize()
-
-	setTextWidthSize()
-
-
+	$("#About").click -> back()
+	$(".backButton").click -> back()
 
 ## Functions for portraits ##
 
 meetUs = () ->
 
-	$("#meet").unbind()
-	addToCurrentPanes( $("#people").removeClass("hidden") )
+	$people = $("#people")
+	$people.children().each -> $(@).remove()
+	$people.removeClass("hidden").fadeIn(1)
 
-	setPortraitWidth = () -> 
-		width = $(window).width()
-		if width < 1200 then $(".portrait").width("33%")
-		else if width < 1700 then $(".portrait").width("24.75%")
-		else $(".portrait").width("16.35%")
-
-	$(window).bind 'resize', -> setPortraitWidth()
+	addToCurrentPanes( $people )
 	
 	for person in Xenophos
 		buildPortraitFor(person)
 
-	setPortraitWidth()
+	setAndBindWhoPageSizes()
 
-	$(".portraits").each -> setTimeout( (-> $(this).addClass("popIn")), 200) 
+	$('html, body').animate({scrollTop: 160}, 1000)
 
-	$('html, body').animate({scrollTop: $("#headerBar").height() + 60}, 1000)
+	# build back button
 
 
 buildPortraitFor = (person) -> 
@@ -121,8 +101,7 @@ buildPortraitFor = (person) ->
 	$portrait.removeClass("hidden").addClass("popIn")
 
 	$portrait.click -> showSpecificBio(person.firstname)
-
-
+	
 
 ## Functions for specicic people pages ##
 
@@ -142,37 +121,115 @@ showSpecificBio = (name) ->
 	else if name is "Jason" then $div = $("#Kevin_Lee_Allen_Lee_Jason_Liang")
 	else throw new Error "Name unrecognized"
 
-	for pane in getCurrentPanes()
-		do (pane) -> pane.fadeOut(400)
+	oldPane.fadeOut(400) for oldPane in getCurrentPanes()
 
-	$div.removeClass("hidden")
+	$div.removeClass("hidden").fadeIn(600)
 
-	$div.children().each -> undefined #show in progression
+	$div.children().each -> $(@).removeClass("hidden").fadeIn(600)
 
+	addToCurrentPanes($div)
 
+	# build back button
 
 
 ## Functions for Method Pane ##
 
 howWeDidIt = () -> 
 
-	$("#meet").unbind()
-	addToCurrentPanes( $("#method").removeClass("hidden") )
+	addToCurrentPanes( $("#method").removeClass("hidden").fadeIn(1) )
 
 	setAndBindHowPageSizes()
+
+	$("#method").append(backButton())
+	
+
+## Back Button ##
+
+back = () -> 
+
+	oldPanes = getCurrentPanes()
+
+	if (oldPanes[0].selector is "#people" and oldPanes[1]?)
+		next = [$("#people")]
+	
+	else 
+		next = [$("#who"), $("#what")]
+
+	oldPane.fadeOut(400) for oldPane in oldPanes
+
+	clearAllCurrentPanes()
+	
+	for newPane in next
+		newPane.fadeIn(400)
+		addToCurrentPanes(newPane)
+
+
+## Set and Bind CSS Functions ##
+
+setAndBindWhoPageSizes = () ->
+
+	setTextWidthSize = () -> 
+		width = $(window).width()
+		if width > 1400 then $(".text").css(width:"20%")
+		else if width > 1200 then $(".text").css(width:"30%")
+		else if width > 900 then $(".text").css(width:"40%")
+		else $(".text").css(width:"60%")
+
+	setPortraitWidth = () -> 
+		width = $(window).width()
+		if width < 800 then $(".portrait").width("49.7%")
+		else if width < 1200 then $(".portrait").width("33%")
+		else if width < 1700 then $(".portrait").width("24.75%")
+		else $(".portrait").width("16.35%")
+
+	setSpecificPeopleStyles = () -> 
+		width = $(window).width()
+		if width < 1000 
+			$(".bannerImage").css(width:"96%",left:"2%")
+			$(".Name").css(left:"4%")
+			$(".info").css(left:"15%",width:"70%")
+			$("#AV").css(right:"4%")
+			$("#GDt").css(left:"3%",width:"41%")
+			$("#AVt").css(right:"8%",width:"41%")
+		else if width < 1400 
+			$(".bannerImage").css(width:"80%",left:"10%")
+			$(".Name").css(left:"12%")
+			$(".info").css(left:"25%",width:"50%")
+			$("#AV").css(right:"12%")
+			$("#GDt").css(left:"12%",width:"32%")
+			$("#AVt").css(right:"25%",width:"32%")
+		else 
+			$(".bannerImage").css(width:"60%",left:"20%")
+			$(".Name").css(left:"22%")
+			$(".info").css(left:"30%",width:"40%")
+			$("#AV").css(right:"22%")
+			$("#GDt").css(left:"22%",width:"25%")
+			$("#AVt").css(right:"25%",width:"25%")
+		
+		#ampersand should be a function of this
+
+
+	$(window).bind 'resize', ->
+		setTextWidthSize()		
+		setPortraitWidth()
+		setSpecificPeopleStyles()
+
+	setTextWidthSize()
+	setPortraitWidth()
+	setSpecificPeopleStyles()
 
 
 setAndBindHowPageSizes = () -> 
 
-	setTitleFontSize = () -> 
+	width = $(window).width()
 
+	setTitleFontSize = () -> 
 		s = Math.floor($("#teachingMasha").height() / 6)
 		$(".title, #inspiTitle").css("font-size": s)
 
-	setMargins = () -> 
-
-		w = $(window).width()
-		if w < 1000 
+	setWidths = () -> 
+		width = $(window).width()
+		if width < 1000 
 			$("article").css(left:"5%",right:"5%",width:"90%")
 			$(".aboutImage").css(width:"96%")
 			$(".tool").css(right:"45%",width:"50%")
@@ -190,7 +247,6 @@ setAndBindHowPageSizes = () ->
 			$(".inspirationImage").css(width: "80%")
 
 	setFontSize = () -> 
-
 		width = $(window).width()
 		size = Math.floor(width / 180) * 2
 		titleSize = Math.floor(size * 0.6) * 2
@@ -204,11 +260,11 @@ setAndBindHowPageSizes = () ->
 
 	$(window).bind 'resize', -> 
 		setTitleFontSize()
-		setMargins()
+		setWidths()
 		setFontSize()
 
 	setTitleFontSize()	
-	setMargins()
+	setWidths()
 	setFontSize()
 
 

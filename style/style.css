@@ -60,6 +60,19 @@ nav {
 
 } 
 
+.backButton {
+
+	width: 60px;
+	height: 26px;
+	background-color: #171515;
+	margin: auto;
+	margin-top: 50px;
+	padding-top: 6px;
+	text-align: center;
+	cursor: pointer;
+
+} .backButton:hover { background-color: #2b2727; }
+
 
 /* Animations */
 
