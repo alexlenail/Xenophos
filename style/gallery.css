@@ -1,8 +1,11 @@
 @charset "utf-8";
 
+* { overflow: hidden;}
+
 body {
 
 	background-color: #171515;
+	cursor: default;
 
 }
 

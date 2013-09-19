@@ -87,6 +87,8 @@ goToGallery = () -> window.location.href = "gallery.html"
 
 ## perhaps something that will exist in future versions ##
 
+###
+
 operatingSystem = () ->
 
 	if navigator.appVersion.indexOf("Mac") isnt -1
@@ -99,4 +101,4 @@ operatingSystem = () ->
 
 
 
-
+###

@@ -84,8 +84,6 @@ meetUs = () ->
 
 	$('html, body').animate({scrollTop: 160}, 1000)
 
-	# build back button
-
 
 buildPortraitFor = (person) -> 
 
@@ -128,8 +126,6 @@ showSpecificBio = (name) ->
 	$div.children().each -> $(@).removeClass("hidden").fadeIn(600)
 
 	addToCurrentPanes($div)
-
-	# build back button
 
 
 ## Functions for Method Pane ##

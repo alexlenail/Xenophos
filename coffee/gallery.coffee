@@ -5,6 +5,35 @@ selected = 4  # Initial value
 numberOfGalleryImages = 30
 
 
+$(document).ready -> loadPage()	
+
+
+loadPage = () -> 
+
+	reloadPage()
+
+	$("#headerBar").hide().fadeIn(1000)
+	$("#theImage").hide().fadeIn(1000)
+	$("#bottomBar").hide().fadeIn(1000)
+
+	$(window).bind 'resize', () -> reloadPage()
+
+
+reloadPage = () -> 
+
+	buildNavFunctions()
+	resizeTheImage()
+	loadBottomBarImages()
+	
+
+
+buildNavFunctions = () ->
+
+	$("#About").click -> exitPage("about.html")
+	$("#Contact").click -> exitPage("404.html")
+	$("#headerBarLogo").click -> exitPage("index.html")
+
+
 ## Resize functions ##
 
 resizeTheImage = () ->
@@ -43,29 +72,6 @@ refreshIcons = () ->
 	$bottomBar.append ListItem(i) for i in images
 
 
-reloadPage = () -> 
-
-	resizeTheImage()
-	loadBottomBarImages()
-	buildNavFunctions()
-
-
-loadPage = () -> 
-
-	reloadPage()
-	$("#headerBar").hide().fadeIn(1000)
-	$("#theImage").hide().fadeIn(1000)
-	$("#bottomBar").hide().fadeIn(1000)
-
-
-$(document).ready ->
-
-	loadPage()	
-
-	$(window).bind 'resize', () -> reloadPage()
-
-
-
 ## Bottom Bar Functions ##
 
 ListItem = (id) ->  # constructor
@@ -93,7 +99,6 @@ selectIcon = (id) ->   # called on click
 		$theImage.fadeTo("fast", 0, -> $(@).attr 'src', url).fadeTo("slow", 1.0)
 
 	resizeTheImage()
-
 
 
 ## Slide Effects ##
@@ -179,11 +184,47 @@ exitPage = (destination) ->
 	window.setTimeout(go, 400)	
 
 
-buildNavFunctions = () ->
 
-	$("#About").click -> exitPage("About.html")
-	$("#Contact").click -> exitPage("404.html")
-	$("#headerBarLogo").click -> exitPage("index.html")
 
+
+## Preload the images ##
+
+preloadGalleryImages = () -> 
+
+	gallery = []
+	for i in [1..30]
+		gallery.push("../images/about/t4.jpg")
+		gallery.push("../images/about/tools0.jpg")
+		gallery.push("../images/about/Alex5.jpg")
+		gallery.push("../images/about/Bradford1.jpg")
+		gallery.push("../images/about/Max.jpg")
+		gallery.push("../images/about/icons/raw/Anna.jpg")
+		gallery.push("../images/about/icons/raw/Masha.jpg")
+		gallery.push("../images/about/greg&arun.jpg")
+		gallery.push("../images/about/t3.jpg")
+		gallery.push("../images/about/tools6.jpg")
+		gallery.push("../images/about/tools/sticks.jpg")
+		gallery.push("../images/about/tools/staves2.jpg")
+		gallery.push("../images/about/tools/whip.jpg")
+		gallery.push("../images/about/tools/steel-wool.jpg")
+		gallery.push("../images/about/tools/floodlight.jpg")
+		gallery.push("../images/about/tools/orb.jpg")
+		gallery.push("../images/about/tools/saber.jpg")
+		gallery.push("../images/about/Alex3.jpg")
+		gallery.push("../images/portfolio/lightpainting/2.jpg")
+		gallery.push("../images/portfolio/lightpainting/21.jpg")
+		gallery.push("../images/portfolio/lightpainting/23.jpg")
+		gallery.push("../images/portfolio/lightpainting/12.jpg")
+		gallery.push("../images/about/Alex2.jpg")
+		gallery.push("../images/about/us.jpg")
+		gallery.push("../images/about/photo-e.jpg")
+		gallery.push("../images/about/lapp.jpg")
+	preload(gallery)
+
+
+preload = (array) -> 
+
+	$(array).each -> 
+		$('<img/>')[0].src = this
 
 
