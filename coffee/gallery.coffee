@@ -1,9 +1,9 @@
 ## The data model is stored locally ##
 
 images = []
-selected = 4  # Initial value
+selected = 9  # Initial value
 numberOfGalleryImages = 30
-
+galleryImageWidth = 120
 
 $(document).ready -> loadPage()	
 
@@ -26,12 +26,11 @@ reloadPage = () ->
 	loadBottomBarImages()
 	
 
-
 buildNavFunctions = () ->
 
 	$("#About").click -> exitPage("about.html")
-	$("#Contact").click -> exitPage("404.html")
 	$("#headerBarLogo").click -> exitPage("index.html")
+	$("#Contact").click -> exitPage("mailto:zfrenchee@gmail.com")
 
 
 ## Resize functions ##
@@ -39,13 +38,14 @@ buildNavFunctions = () ->
 resizeTheImage = () ->
 
 	windowHeight = $(window).height()
-	desiredImageHeight = windowHeight - 350 # which is the header and bottom combined
+	desiredImageHeight = windowHeight - 230    # header + bottom
 	$("#theImage").height(desiredImageHeight)
+
 
 resizeBottomBar = () -> 
 
 	windowWidth = $(window).width()
-	desiredWidth = windowWidth + 193 * 2
+	desiredWidth = windowWidth + 122 * 2
 	$("#bottomBar").width(desiredWidth)
 
 	return desiredWidth
@@ -55,20 +55,10 @@ resizeBottomBar = () ->
 
 loadBottomBarImages = () ->
 
-	numberOfIconsToDisplay = Math.floor(resizeBottomBar()/193)
-
-	images.length = 0
+	numberOfIconsToDisplay = Math.floor(resizeBottomBar()/galleryImageWidth)
 	images.push(i) for i in [1..numberOfIconsToDisplay]
-		
-	refreshIcons()
-
-
-refreshIcons = () -> 
-
 	$bottomBar = $("#bottomBar")
-
 	$bottomBar.empty()
-
 	$bottomBar.append ListItem(i) for i in images
 
 
@@ -96,9 +86,7 @@ selectIcon = (id) ->   # called on click
 	url = "images/portfolio/lightpainting/#{selected}.jpg"
 
 	unless $theImage.attr('src') is url
-		$theImage.fadeTo("fast", 0, -> $(@).attr 'src', url).fadeTo("slow", 1.0)
-
-	resizeTheImage()
+		$theImage.fadeTo 100, 0, -> $(@).attr('src', url).load -> $(@).fadeTo(100, 1.0) 
 
 
 ## Slide Effects ##
@@ -106,28 +94,32 @@ selectIcon = (id) ->   # called on click
 centerSelectedImage = () ->
 
 	if images.indexOf(selected) > images.length * 0.7 then slideLeft()
-	else if images.indexOf(selected) < images.length * 0.16 then slideRight()
+	else if images.indexOf(selected) < images.length * 0.3 then slideRight()
 	else return
 
 
 slideLeft = () -> 
 
-	addBack()
+	removeFront()
+	$("#bottomBar").addClass 'slideLeft'
 
-	$("#bottomBar").animate("padding-left": "0px", 400, 'linear', -> 
-		$("#bottomBar").css("padding-left": "193px")
-		removeFront()
-	)
-
+	window.setTimeout( -> 
+		addBack()
+		$("#bottomBar").removeClass 'slideLeft'
+		$("#bottomBar").css("padding-left": "0px")
+	, 200)
 
 
 slideRight = () ->
 
-	$("#bottomBar").css("padding-left": "0px")
-	
-	addFront()
+	$("#bottomBar").addClass 'slideRight'
 
-	$("#bottomBar").animate("padding-left": "193px", 400, 'linear', removeBack())
+	window.setTimeout( -> 
+		addFront()
+		$("#bottomBar").removeClass 'slideRight'
+		$("#bottomBar").css("padding-left": "0px")
+		removeBack()
+	, 200)
 
 	
 removeFront = () -> deleteListItem( images.shift() )
@@ -169,8 +161,6 @@ $(document).keydown( (e) ->
 
 )
 
-
-
 ## Exiting page functions ## 
 
 exitPage = (destination) ->
@@ -183,48 +173,16 @@ exitPage = (destination) ->
 
 	window.setTimeout(go, 400)	
 
+###
+bindContact = () -> 
 
+	backsplash = $('<div/>', class: 'backsplash')
+	backsplash.width $(window).width()
+	backsplash.height $(window).height()
 
+	$('#Contact').click -> 
+		backsplash.hide()
+		backsplash.fadeIn()
+		$('html').prepend(backsplash)
 
-
-## Preload the images ##
-
-preloadGalleryImages = () -> 
-
-	gallery = []
-	for i in [1..30]
-		gallery.push("../images/about/t4.jpg")
-		gallery.push("../images/about/tools0.jpg")
-		gallery.push("../images/about/Alex5.jpg")
-		gallery.push("../images/about/Bradford1.jpg")
-		gallery.push("../images/about/Max.jpg")
-		gallery.push("../images/about/icons/raw/Anna.jpg")
-		gallery.push("../images/about/icons/raw/Masha.jpg")
-		gallery.push("../images/about/greg&arun.jpg")
-		gallery.push("../images/about/t3.jpg")
-		gallery.push("../images/about/tools6.jpg")
-		gallery.push("../images/about/tools/sticks.jpg")
-		gallery.push("../images/about/tools/staves2.jpg")
-		gallery.push("../images/about/tools/whip.jpg")
-		gallery.push("../images/about/tools/steel-wool.jpg")
-		gallery.push("../images/about/tools/floodlight.jpg")
-		gallery.push("../images/about/tools/orb.jpg")
-		gallery.push("../images/about/tools/saber.jpg")
-		gallery.push("../images/about/Alex3.jpg")
-		gallery.push("../images/portfolio/lightpainting/2.jpg")
-		gallery.push("../images/portfolio/lightpainting/21.jpg")
-		gallery.push("../images/portfolio/lightpainting/23.jpg")
-		gallery.push("../images/portfolio/lightpainting/12.jpg")
-		gallery.push("../images/about/Alex2.jpg")
-		gallery.push("../images/about/us.jpg")
-		gallery.push("../images/about/photo-e.jpg")
-		gallery.push("../images/about/lapp.jpg")
-	preload(gallery)
-
-
-preload = (array) -> 
-
-	$(array).each -> 
-		$('<img/>')[0].src = this
-
-
+###

@@ -53,7 +53,7 @@
     $(window).bind('resize', function() {
       return resizeIndexImage();
     });
-    $indexImage.load(function() {
+    $indexImage.ready(function() {
       resizeIndexImage();
       return $indexImage.fadeIn(3000, prepareEnterSite);
     });
@@ -64,8 +64,8 @@
     var gallery, i, _i;
     gallery = [];
     for (i = _i = 1; _i <= 30; i = ++_i) {
-      gallery.push("../images/portfolio/lightpainting/" + i + ".jpg");
-      gallery.push("../images/portfolio/lightpainting/icons/" + i + ".jpg");
+      gallery.push("images/portfolio/lightpainting/" + i + ".jpg");
+      gallery.push("images/portfolio/lightpainting/icons/" + i + ".jpg");
     }
     return preload(gallery);
   };

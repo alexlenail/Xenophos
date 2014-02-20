@@ -43,7 +43,7 @@ $(document).ready () ->
 	
 	$(window).bind 'resize', -> resizeIndexImage()
 
-	$indexImage.load -> 
+	$indexImage.ready -> 
 		resizeIndexImage()
 		$indexImage.fadeIn(3000, prepareEnterSite)
 
@@ -56,8 +56,8 @@ preloadGalleryImages = () ->
 
 	gallery = []
 	for i in [1..30]
-		gallery.push("../images/portfolio/lightpainting/#{i}.jpg")
-		gallery.push("../images/portfolio/lightpainting/icons/#{i}.jpg")
+		gallery.push("images/portfolio/lightpainting/#{i}.jpg")
+		gallery.push("images/portfolio/lightpainting/icons/#{i}.jpg")
 	preload(gallery)
 
 

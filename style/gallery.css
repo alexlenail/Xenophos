@@ -13,47 +13,36 @@ body {
 
 #Gallery {opacity:1.0;}
 
-
-
 #theImage {
 
 	display: block;
 	margin-right: auto;
 	margin-left: auto;
+
 }
 
 #bottomBar {
 
-	height: 150px;
+	height: 84px;
 	width: auto;
 	background-color: #2b2727;
 	position: relative;
-	margin-top: 30px;
-	left: -193px;
-	padding-left: 193px;
+	margin-top: 20px;
+	left: -121px;
 }
 
 
 #bottomBar li {
 
-	width: 187px;
-	height: 140px;
-	margin-top: 5px;
-	margin-bottom: 5px;	
-	margin-left: 3px;
-	margin-right: 3px;
+	background-size: 120px;
+	background-repeat: no-repeat;
+
+	width: 120px;
+	height: 80px;
+	margin: 2px 1px 2px 1px;
 	position: relative;
 	float: left;
-	opacity: 0.7;
-
-} #bottomBar li:hover, #bottomBar li:active {opacity:1.0;}
-
-
-.fade {
-
-	transition: opacity .4s ease-in-out;
-	-moz-transition: opacity .4s ease-in-out;
-	-webkit-transition: opacity .4s ease-in-out;
+	border-radius: 2px;
 
 }
 

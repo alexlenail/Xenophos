@@ -12,14 +12,7 @@ a:link, a:hover, a:visited, a:active {
 
 } a:hover { opacity: 1.0; }
 
-.unselectable {
-
-   -moz-user-select: -moz-none;
-   -khtml-user-select: none;
-   -webkit-user-select: none;
-   -ms-user-select: none;
-   user-select: none;
-}
+.unselectable { z-index: -999999; }
 
 .hidden { display: none !important; }
 
@@ -30,9 +23,9 @@ a:link, a:hover, a:visited, a:active {
 
 	background-color: #2b2727;
 	width: auto;
-	height: 90px;
-	margin-top: 30px;
-	margin-bottom: 30px;
+	height: 60px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 #headerBarLogo {
@@ -40,18 +33,18 @@ a:link, a:hover, a:visited, a:active {
 	background-image: url("../images/graphics/logo.png"); /*Version 9*/
 	background-repeat: no-repeat;
 	position: absolute;
-	left: 13%;
-	height: 81px;
-	width: 512px;
-	margin-top: 8px;
+	left: 19%;
+	height: inherit;
+	width: 300px;
+	margin-top: 4px;
 }
 
 nav {
 
-	font-size: 24px;
+	font-size: 18px;
 	position: absolute;
-	right: 18%;
-	top: 58px;
+	right: 20%;
+	top: 38px;
 
 } nav ul li {
 
@@ -72,6 +65,14 @@ nav {
 	cursor: pointer;
 
 } .backButton:hover { background-color: #2b2727; }
+
+.backsplash {
+
+	background-color: rgba(0, 0, 0, 0.9);
+	position: fixed;
+	z-index: 20;
+
+}
 
 
 /* Animations */
@@ -100,33 +101,69 @@ nav {
 
 .popIn {
 
-	animation: popIn 1s ease-in-out;
-	-webkit-animation: popIn 1.3s ease-in-out;
-	-moz-animation: popIn 1s ease-in-out;
+	animation: popIn 0.7s ease-in-out;
+	-webkit-animation: popIn 0.7s ease-in-out;
+	-moz-animation: popIn 0.7s ease-in-out;
 }
 
 @keyframes popIn {
 	0% { transform: scale(0.6); opacity: 0.0; }
-	60% { transform: scale(1.01); }
-	80% { transform: scale(0.99); opacity: 1; }	
-	100% { transform: scale(1); opacity: 1; }		
+	100% { transform: scale(1); opacity: 1; }
 }
 
 @-webkit-keyframes popIn {
 	0% { -webkit-transform: scale(0.6); opacity: 0.0; }
-	60% { -webkit-transform: scale(1.01); }
-	90% { -webkit-transform: scale(0.99); opacity: 1; }	
-	100% { -webkit-transform: scale(1); opacity: 1; }		
+	100% { -webkit-transform: scale(1); opacity: 1; }
 }
 
 @-moz-keyframes popIn {
 	0% { -moz-transform: scale(0.6); opacity: 0.0; }
-	60% { -moz-transform: scale(1.01); }
-	80% { -moz-transform: scale(0.99); opacity: 1; }	
-	100% { -moz-transform: scale(1); opacity: 1; }		
+	100% { -moz-transform: scale(1); opacity: 1; }
 }
 
 
+.slideLeft {
+
+	animation: slideLeft 0.2s ease-in-out;
+	-webkit-animation: slideLeft 0.2s ease-in-out;
+	-moz-animation: slideLeft 0.2s ease-in-out;
+}
+
+@keyframes slideLeft {
+	0% { padding-left: 122px; }
+	100% { padding-left: 0px; }
+}
+
+@-webkit-keyframes slideLeft {
+	0% { padding-left: 122px; }
+	100% { padding-left: 0px; }
+}
+
+@-moz-keyframes slideLeft {
+	0% { padding-left: 122px; }
+	100% { padding-left: 0px; }
+}
 
 
+.slideRight {
+
+	animation: slideRight 0.2s ease-in-out;
+	-webkit-animation: slideRight 0.2s ease-in-out;
+	-moz-animation: slideRight 0.2s ease-in-out;
+}
+
+@keyframes slideRight {
+	0% { padding-left: 0px; }
+	100% { padding-left: 122px; }
+}
+
+@-webkit-keyframes slideRight {
+	0% { padding-left: 0px; }
+	100% { padding-left: 122px; }
+}
+
+@-moz-keyframes slideRight {
+	0% { padding-left: 0px; }
+	100% { padding-left: 122px; }
+}
 

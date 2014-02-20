@@ -30,6 +30,7 @@ getCurrentPanes = () -> return currentPanes
 
 $(document).ready -> loadpage()
 
+
 loadpage = () -> 
 
 	buildNavFunctions()
@@ -44,12 +45,14 @@ loadpage = () ->
 
 	addToCurrentPanes(who, what)
 
+	preloadAboutImages()
+
 
 buildNavFunctions = () ->
 
 	$("#Gallery").click -> exitPage("gallery.html")
-	$("#Contact").click -> exitPage("404.html")
 	$("#headerBarLogo").click -> exitPage("index.html")
+	$("#Contact").click -> exitPage("mailto:zfrenchee@gmail.com")
 
 
 bindClickEvents = () -> 
@@ -72,7 +75,7 @@ bindClickEvents = () ->
 meetUs = () ->
 
 	$people = $("#people")
-	$people.children().each -> $(@).remove()
+	$people.children().each -> $(@).remove()  # remove duplicates
 	$people.removeClass("hidden").fadeIn(1)
 
 	addToCurrentPanes( $people )
@@ -82,7 +85,7 @@ meetUs = () ->
 
 	setAndBindWhoPageSizes()
 
-	$('html, body').animate({scrollTop: 160}, 1000)
+	$('body').animate({scrollTop: 100}, 1000)
 
 
 buildPortraitFor = (person) -> 
@@ -98,31 +101,30 @@ buildPortraitFor = (person) ->
 
 	$portrait.removeClass("hidden").addClass("popIn")
 
-	$portrait.click -> showSpecificBio(person.firstname)
+	$portrait.click -> 
+		$('body').animate({scrollTop: 0}, 200)
+		showSpecificBio(person.firstname)
 	
 
 ## Functions for specicic people pages ##
 
 showSpecificBio = (name) -> 
 
-	if name is "Alex" then $div = $("#Alex_Lenail")
-	else if name is "Bradford" then $div = $("#Bradford_Thorne")
-	else if name is "Max" then $div = $("#Max_Lenail")
-	else if name is "Anna" then $div = $("#Anna_McGarrigle")
-	else if name is "Masha" then $div = $("#Masha_Andreyeva")
-	else if name is "Arun" then $div = $("#Arun_Varma_Gregory_Dunn")
-	else if name is "Gregory" then $div = $("#Arun_Varma_Gregory_Dunn")
-	else if name is "Tiffany" then $div = $("#Tiffany_Tsung_Paige_Morkner_Eric_Theis")
-	else if name is "Paige" then $div = $("#Tiffany_Tsung_Paige_Morkner_Eric_Theis")
-	else if name is "Eric" then $div = $("#Tiffany_Tsung_Paige_Morkner_Eric_Theis")
-	else if name is "Kevin" then $div = $("#Kevin_Lee_Allen_Lee_Jason_Liang")
-	else if name is "Jason" then $div = $("#Kevin_Lee_Allen_Lee_Jason_Liang")
-	else throw new Error "Name unrecognized"
+	switch name
+		when "Alex" then $div = $("#Alex_Lenail")
+		when "Bradford" then $div = $("#Bradford_Thorne")
+		when "Max" then $div = $("#Max_Lenail")
+		when "Anna" then $div = $("#Anna_McGarrigle")
+		when "Masha" then $div = $("#Masha_Andreyeva")
+		when "Arun" then $div = $("#Arun_Varma_Gregory_Dunn")
+		when "Gregory" then $div = $("#Arun_Varma_Gregory_Dunn")
+		when "Tiffany", "Paige", "Eric" then $div = $("#Tiffany_Tsung_Paige_Morkner_Eric_Theis")
+		when "Kevin", "Jason" then $div = $("#Kevin_Lee_Allen_Lee_Jason_Liang")
+		else throw new Error "Name unrecognized"
 
-	oldPane.fadeOut(400) for oldPane in getCurrentPanes()
+	oldPane.fadeOut(200) for oldPane in getCurrentPanes()
 
 	$div.removeClass("hidden").fadeIn(600)
-
 	$div.children().each -> $(@).removeClass("hidden").fadeIn(600)
 
 	addToCurrentPanes($div)
@@ -133,10 +135,7 @@ showSpecificBio = (name) ->
 howWeDidIt = () -> 
 
 	addToCurrentPanes( $("#method").removeClass("hidden").fadeIn(1) )
-
 	setAndBindHowPageSizes()
-
-	$("#method").append(backButton())
 	
 
 ## Back Button ##
@@ -147,17 +146,20 @@ back = () ->
 
 	if (oldPanes[0].selector is "#people" and oldPanes[1]?)
 		next = [$("#people")]
-	
-	else 
+		$('body').animate({scrollTop: 100}, 1000)
+
+	else
 		next = [$("#who"), $("#what")]
 
-	oldPane.fadeOut(400) for oldPane in oldPanes
+	for oldPane in oldPanes
+		do (oldPane) -> 
+			oldPane.fadeOut(400)
 
 	clearAllCurrentPanes()
-	
+
 	for newPane in next
-		newPane.fadeIn(400)
-		addToCurrentPanes(newPane)
+			newPane.fadeIn(400)
+			addToCurrentPanes(newPane)
 
 
 ## Set and Bind CSS Functions ##
@@ -225,7 +227,7 @@ setAndBindHowPageSizes = () ->
 
 	setWidths = () -> 
 		width = $(window).width()
-		if width < 1000 
+		if width < 1050 
 			$("article").css(left:"5%",right:"5%",width:"90%")
 			$(".aboutImage").css(width:"96%")
 			$(".tool").css(right:"45%",width:"50%")
@@ -264,8 +266,6 @@ setAndBindHowPageSizes = () ->
 	setFontSize()
 
 
-
-
 ## Exiting page functions ## 
 
 exitPage = (destination) ->
@@ -276,4 +276,63 @@ exitPage = (destination) ->
 	$(".pane").fadeOut(400)
 
 	window.setTimeout(go, 400)
+
+###
+
+bindContact = () -> 
+
+	backsplash = $('<div/>', class: 'backsplash')
+	backsplash.width $(window).width()
+	backsplash.height $(window).height()
+
+	$('#Contact').click -> 
+		backsplash.hide()
+		backsplash.fadeIn()
+		$('html').prepend(backsplash)
+
+###
+
+
+## Preload the images ##
+
+preloadAboutImages = () -> 
+
+	gallery = []
+
+	gallery.push("images/about/t4.jpg")
+	gallery.push("images/about/tools0.jpg")
+	gallery.push("images/about/Alex5.jpg")
+	gallery.push("images/about/Bradford1.jpg")
+	gallery.push("images/about/Max.jpg")
+	gallery.push("images/about/icons/raw/Anna.jpg")
+	gallery.push("images/about/icons/raw/masha.jpg")
+	gallery.push("images/about/greg&arun.jpg")
+	gallery.push("images/about/t3.jpg")
+	gallery.push("images/about/tools6.jpg")
+	gallery.push("images/about/tools/sticks.jpg")
+	gallery.push("images/about/tools/staves2.jpg")
+	gallery.push("images/about/tools/whip.jpg")
+	gallery.push("images/about/tools/steel-wool.jpg")
+	gallery.push("images/about/tools/floodlight.jpg")
+	gallery.push("images/about/tools/orb.jpg")
+	gallery.push("images/about/tools/saber.jpg")
+	gallery.push("images/about/Alex3.jpg")
+	gallery.push("images/portfolio/lightpainting/2.jpg")
+	gallery.push("images/portfolio/lightpainting/21.jpg")
+	gallery.push("images/portfolio/lightpainting/23.jpg")
+	gallery.push("images/portfolio/lightpainting/12.jpg")
+	gallery.push("images/about/Alex2.jpg")
+	gallery.push("images/about/us.jpg")
+	gallery.push("images/about/photo-e.jpg")
+	gallery.push("images/about/lapp.jpg")
+	
+	preload(gallery)
+
+
+preload = (array) -> 
+
+	for image in array
+		img = new Image()
+		img.src = image
+
 
