@@ -96,8 +96,7 @@ nav {
 	-moz-transition: text-shadow .3s ease-in-out, opacity .3s ease-in-out;
 	-webkit-transition: text-shadow .3s ease-in-out, opacity .3s ease-in-out;
 
-} .fade2:hover { text-shadow: 0px 0px 5px white; opacity: 1;}
-
+} .fade2:hover { text-shadow: 0px 0px 5px white; opacity: 1; }
 
 .popIn {
 

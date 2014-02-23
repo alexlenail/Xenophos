@@ -35,6 +35,7 @@ loadpage = () ->
 
 	buildNavFunctions()
 	bindClickEvents()
+	bindHoverEvents()
 	
 	setAndBindHowPageSizes()
 	setAndBindWhoPageSizes()
@@ -69,6 +70,13 @@ bindClickEvents = () ->
 
 	$("#About").click -> back()
 	$(".backButton").click -> back()
+
+bindHoverEvents = () -> 
+
+	$('#who').children().hover (-> $('#meet').addClass('aboutHover')), (-> $('#meet').removeClass('aboutHover'))
+	$('#what').children().hover (-> $('#how').addClass('aboutHover')), (-> $('#how').removeClass('aboutHover'))
+
+
 
 ## Functions for portraits ##
 
