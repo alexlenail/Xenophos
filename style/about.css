@@ -8,7 +8,7 @@ h1 { line-height: 1.6;}
 
 #About {opacity:1.0;}
 
-.pane{
+.pane {
 
 	margin-bottom: 30px;
 	position: relative;
@@ -23,7 +23,7 @@ h1 { line-height: 1.6;}
  	margin: auto;
  	border: 1px solid black;
  	background-color: black;
- 	width: 80%;
+ 	cursor: pointer;
 }
 
 .text {
@@ -48,9 +48,7 @@ h1 { line-height: 1.6;}
 	-moz-transition: text-shadow .3s ease-in-out, opacity .3s ease-in-out;
 	-webkit-transition: text-shadow .3s ease-in-out, opacity .3s ease-in-out;
 
-}
-
-.aboutHover { text-shadow: 0px 0px 5px white !important; opacity: 1 !important; }
+} .aboutHover { text-shadow: 0px 0px 5px white !important; opacity: 1 !important; }
 
 /* Meet Us Styles */
 
@@ -288,5 +286,78 @@ article {
 
 } #photo-e-text { right: 50%; } #lapp-text { left: 50%; }
 
+
+@media(max-width: 1000px) {
+
+.bannerImage { width: 96%; left: 2%; }
+.Name { left: 4%; }
+.info { width: 70%; left: 15%; }
+#AV { right: 4%; }
+#GDt { width: 41%; left: 3%; }
+#AVt { width: 41%; right: 8%; }
+
+article { width: 90%; left: 5%; }
+.aboutImage { width: 96%; } /*left?*/
+.tool { width: 50%; right: 45%; }
+.tool-text { width: 40%; left: 50%; }
+#actionTitleImage { width: 90%; left: 5%; }
+#actionText { width: 26%; top: 20%; left: 58%; }
+.inspirationImage { width: 90%; }
+
+}
+
+@media(min-width: 1001px) and (max-width: 1400px) {
+
+.bannerImage { width: 80%; left: 10%; }
+.Name { left: 12%; }
+.info { width: 50%; left: 25%; }
+#AV { right: 12%; }
+#GDt { width: 32%; left: 12%; }
+#AVt { width: 32%; right: 25%; }
+
+article { width: 40%; left: 30%; }
+.aboutImage { width: 80%; } /*left?*/
+.tool { width: 40%; right: 12%; }
+.tool-text { width: 25%; left: 55%; }
+#actionTitleImage { width: 50%; left: 10%; }
+#actionText { width: 22%; top: 26%; left: 62.5%; }
+.inspirationImage { width: 80%; }
+
+}
+
+@media(min-width: 1400px) {
+
+.bannerImage { width: 60%; left: 20%; }
+.Name { left: 22%; }
+.info { width: 40%; left: 30%; }
+#AV { right: 22%; }
+#GDt { width: 25%; left: 22%; }
+#AVt { width: 25%; right: 25%; }
+
+article { width: 40%; left: 30%; }
+.aboutImage { width: 80%; } /*left?*/
+.tool { width: 40%; right: 12%; }
+.tool-text { width: 25%; left: 55%; }
+#actionTitleImage { width: 50%; left: 10%; }
+#actionText { width: 22%; top: 26%; left: 62.5%; }
+.inspirationImage { width: 80%; }
+
+}
+
+.portrait { width: 49.7%; }
+.text { width: 60%; }
+
+@media(min-width: 800px) and (max-width: 1199px) {
+	.portrait { width: 33%; }
+	.text { width: 40%; }
+}
+@media(min-width: 1200px) and (max-width: 1699px) {
+	.portrait { width: 24.75%; }
+	.text { width: 30%; }
+}
+@media(min-width: 1700px) {
+	.portrait { width: 16.35%; }
+	.text { width: 20%; }
+}
 
 

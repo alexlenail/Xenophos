@@ -172,17 +172,3 @@ exitPage = (destination) ->
 	$("#bottomBar").fadeOut(400)
 
 	window.setTimeout(go, 400)	
-
-###
-bindContact = () -> 
-
-	backsplash = $('<div/>', class: 'backsplash')
-	backsplash.width $(window).width()
-	backsplash.height $(window).height()
-
-	$('#Contact').click -> 
-		backsplash.hide()
-		backsplash.fadeIn()
-		$('html').prepend(backsplash)
-
-###
