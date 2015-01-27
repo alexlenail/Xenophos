@@ -19,6 +19,8 @@ buildNavFunctions = () ->
 	$("#Gallery").click -> exitPage("gallery.html")
 	$("#About").click -> exitPage('about.html')
 	$("#headerBarLogo").click -> exitPage("index.html")
+	$("#Contact").click -> exitPage("mailto:zfrenchee@gmail.com")
+
 
 howWeDidIt = () -> 
 

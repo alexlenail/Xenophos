@@ -46,6 +46,7 @@ buildNavFunctions = () ->
 	$("#About").click -> exitPage('about.html')
 	$("#headerBarLogo").click -> exitPage("index.html")
 	$(".backButton").click -> back()
+	$("#Contact").click -> exitPage("mailto:zfrenchee@gmail.com")
 
 
 ## Functions for portraits ##
