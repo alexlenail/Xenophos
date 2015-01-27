@@ -3,7 +3,7 @@
   var goToGallery, preload, preloadGalleryImages, prepareEnterSite;
 
   $(document).ready(function() {
-    $.backstretch('images/graphics/index.jpg, {speed: 150}', {
+    $.backstretch('images/graphics/index.jpg', {
       speed: 3000
     });
     return preloadGalleryImages();
@@ -35,7 +35,7 @@
     return $enterSite.delay(10).fadeIn(3000, function() {
       return $enterSite.addClass("fade2").click(function() {
         $enterSite.removeClass("fade2").fadeOut(800);
-        $(".indexImage").fadeOut(2000);
+        $(".backstretch").fadeOut(2000);
         return window.setTimeout(goToGallery, 2000);
       });
     });

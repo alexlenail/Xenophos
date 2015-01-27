@@ -2,7 +2,7 @@
 
 $(document).ready () -> 
 
-	$.backstretch('images/graphics/index.jpg, {speed: 150}', {speed: 3000})
+	$.backstretch('images/graphics/index.jpg', {speed: 3000})
 
 	preloadGalleryImages()
 
@@ -35,7 +35,7 @@ prepareEnterSite = () ->
 
 	$enterSite.delay(10).fadeIn(3000, -> $enterSite.addClass("fade2").click ->
 		$enterSite.removeClass("fade2").fadeOut(800)
-		$(".indexImage").fadeOut(2000)
+		$(".backstretch").fadeOut(2000)
 		window.setTimeout(goToGallery, 2000) )
 
 
