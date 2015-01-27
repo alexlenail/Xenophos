@@ -1,53 +1,13 @@
 ##  Main title image fits window  ##
 
-resizeIndexImage = () ->
-
-	window_height = $(window).height()
-	window_width = $(window).width()
-	$indexImage = $(".indexImage")
-	image_height = $indexImage.height()
-	image_width = $indexImage.width()
-
-	if (window_height / window_width) > (image_height / image_width) # => skinny window
-
-		$indexImage.height(window_height)
-		$indexImage.width(window_height * image_width / image_height)
-		leftOffset = ($indexImage.width() - $(window).width()) / 2
-		if leftOffset > 0
-			$indexImage.offset({left: -leftOffset})
-		else
-			$indexImage.offset({left: 0})			
-
-		$indexImage.offset({top: 0})
-
-	else # (window_height / window_width) < (image_height / image_width) # => fat window
-
-		$indexImage.width(window_width)
-		$indexImage.height(window_width * image_height / image_width)
-		topOffset = ($indexImage.height() - $(window).height()) / 2
-		if topOffset > 0
-			$indexImage.offset({top: -topOffset})
-		else
-			$indexImage.offset({top: 0})
-
-		$indexImage.offset({left: 0})
-
-
 $(document).ready () -> 
 
-	$indexImage = $(".indexImage")
-	$enterSite = $("#enterSite")
-	
-	$indexImage.hide()
-	$enterSite.hide()
-	
-	$(window).bind 'resize', -> resizeIndexImage()
-
-	$indexImage.ready -> 
-		resizeIndexImage()
-		$indexImage.fadeIn(3000, prepareEnterSite)
+	$.backstretch('images/graphics/index.jpg, {speed: 150}', {speed: 3000})
 
 	preloadGalleryImages()
+
+
+$(document).on "backstretch.show", -> prepareEnterSite()
 
 
 ## Preload the images ##
@@ -67,7 +27,6 @@ preload = (array) ->
 		$('<img/>')[0].src = this
 
 
-
 ## Enter Gallery button animation and function ##
 
 prepareEnterSite = () -> 
@@ -84,7 +43,6 @@ prepareEnterSite = () ->
 goToGallery = () -> window.location.href = "gallery.html"
 
 
-
 ## perhaps something that will exist in future versions ##
 
 ###
@@ -98,7 +56,5 @@ operatingSystem = () ->
 		return "Enter fullscreen for a better view (press F11)"
 
 	else return undefined
-
-
 
 ###
